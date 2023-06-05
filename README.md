@@ -20,3 +20,14 @@ Logowanie do bazy:
 Stworzenie nowej bazy:
 
 ![Przechwytywanie](https://github.com/Manotiwak/Tch_lab11/assets/129669781/d7469235-26f9-4f8a-8417-162b1ddd90d3)
+
+
+Generowanie reprezentacji graficznej docker-compose.yml:
+
+![graf](https://github.com/Manotiwak/Tch_lab11/assets/129669781/0a9ea5c4-eaa6-492c-be99-7a8676a54d7e)
+
+
+
+Wygenerowany graf:
+
+![docker-compose](https://github.com/Manotiwak/Tch_lab11/assets/129669781/7d8f6b32-bb7c-479d-be15-be2262a08157)
