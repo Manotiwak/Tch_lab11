@@ -4,5 +4,8 @@
      </head>  
 
      <body>  
-          <?php echo '<h1>Mateusz Nowak</h1>'; ?>
+          <h1>Mateusz Nowak</h1>
+          <?php
+             echo 'PHP w wersji: '. phpversion();
+          ?>
      </body>
