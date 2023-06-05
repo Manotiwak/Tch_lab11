@@ -1,0 +1,59 @@
+version: '3.8'
+
+services:
+  nginx:
+    build: ./nginx/ # Budowa obrazu Nginx z katalogu nginx
+    container_name: nginx-co
+    ports:
+      - 6600:80 # Mapowanie portu 6600 na port 80, port 6666 jest uznany za niebezpieczny i jest zablokowany
+    links:
+      - php # Łączenie z kontenerem php
+    volumes:
+      - ./www/html/:/var/www/html/ # Montowanie katalogu ./www/html/ do katalogu kontenera Nginx /var/www/html/
+    networks: # Przyłączenie do sieci
+      - backend
+      - frontend
+
+  php:
+    image: php:7.0-fpm
+    container_name: php-co
+    expose:
+      - 6000 # Nasłuchiwanie na porcie 6000
+    volumes:
+      - ./www/html/:/var/www/html/ # Analogicznie jak w kontenerze Nginx
+    networks:
+      - backend # Przyłączenie do sieci backend
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: phpmyadmin-co
+    restart: always
+    depends_on:
+      - mysql # Ustawienie zależności od kontenera mysql
+    ports:
+      - 6001:80 # Mapowanie portu 6001 na 80
+    networks:
+      - backend # Przyłączenie do sieci backend
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-co
+    restart: always
+    ports:
+      - 3307:3306 # Mapowanie portu 3307 na 3306
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=student # Ustawienie hasła roota
+    networks:
+      - backend # Przyłączenie do sieci backend
+
+
+volumes:
+  mysql: # Definicja wolumenu mysql
+
+networks:
+  backend:
+    driver: bridge # Ustawienie sieci typu bridge
+  frontend:
+    driver: bridge
